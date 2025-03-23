@@ -23,7 +23,7 @@ $addTimestamp
 $if[$httpResult[count]>=11]
 $addButton[no;Birthday-ante;;primary;yes;◀️]
 $addButton[no;Birthday-sig;;primary;no;▶️]
-$elseif[$httpResult[count]<=11]]
+$elseif[$httpResult[count]<=11]
 $addButton[no;Birthday-ante;;primary;yes;◀️]
 $addButton[no;Birthday-sig;;primary;yes;▶️]
 $endif
