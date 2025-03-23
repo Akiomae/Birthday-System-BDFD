@@ -1,5 +1,6 @@
 # Birthday-System-in-BDFD
 Sistema de Cumpleaños para BDFD (Bot Desinger For Discord)
+Con este sistema tu bot enviara mensajes de felicidades cada que un usuario cumpla años y este registrado.
 
 #### Solo necesitas crear 1 variable
 
