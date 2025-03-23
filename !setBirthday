@@ -1,0 +1,21 @@
+$nomention
+$onlyPerms[managechannels;❌ Necesitas el permiso de  **Gestionar canales** para usar este comando.]
+$onlyIf[$mentionedChannels[1]!=; Porfavor menciona un canal]
+$if[$serverChannelExists[$mentionedChannels[1]]==false]El canal no existe$else
+
+$httpPost[http://vps-d58308d1.es.cloud.lucnodes.es:4402/API/SetBirthday;{
+    "token": "$getVar[TOKEN]",
+    "bot_id": "$botID",
+    "guild_id": "$guildID",
+    "channelID": "$mentionedChannels[1]"
+}]
+
+$if[$httpResult[success]==true]
+$description[El canal para el sistema de cumpleaños ahora se encuentra en <#$mentionedChannels[1]>] 
+$color[#ff9af9]
+$reply 
+$else
+$description[Ha ocurrido un error, intentelo nuevamente.] 
+$reply 
+$endif
+$endif
