@@ -1,0 +1,50 @@
+$textSplit[$customID;-]
+$if[$splitText[1]==Birthday]
+
+$if[$splitText[2]==sig]
+$nomention
+$httpGet[http://vps-d58308d1.es.cloud.lucnodes.es:4402/API/GetBirthdays?bot_id=$botID&guild_id=$guildID]
+
+$title[Lista de cumpleaños de $serverName[$guildID]]
+$description[> **Cantidad de usuarios:** $httpResult[count]
+* <@$httpResult[users;11;id]> | $httpResult[users;11;fecha]
+$if[$httpResult[users;12;id]==]$else* <@$httpResult[users;12;id]> | $httpResult[users;12;fecha]$endif
+$if[$httpResult[users;13;id]==]$else* <@$httpResult[users;13;id]> | $httpResult[users;13;fecha]$endif
+$if[$httpResult[users;14;id]==]$else* <@$httpResult[users;14;id]> | $httpResult[users;14;fecha]$endif
+$if[$httpResult[users;15;id]==]$else* <@$httpResult[users;15;id]> | $httpResult[users;15;fecha]$endif
+$if[$httpResult[users;16;id]==]$else* <@$httpResult[users;16;id]> | $httpResult[users;16;fecha]$endif
+$if[$httpResult[users;17;id]==]$else* <@$httpResult[users;17;id]> | $httpResult[users;17;fecha]$endif
+$if[$httpResult[users;18;id]==]$else* <@$httpResult[users;18;id]> | $httpResult[users;18;fecha]$endif
+$if[$httpResult[users;19;id]==]$else* <@$httpResult[users;19;id]> | $httpResult[users;19;fecha]$endif
+$if[$httpResult[users;20;id]==]$else* <@$httpResult[users;20;id]> | $httpResult[users;20;fecha]$endif
+$if[$httpResult[users;21;id]==]$else* <@$httpResult[users;21;id]> | $httpResult[users;21;fecha]$endif]
+$footer[Akiomae APIS]
+$addTimestamp
+$addButton[no;Birthday-ante;;primary;no;◀️]
+$addButton[no;Birthday-sig;;primary;yes;▶️]
+$endif
+
+$if[$splitText[2]==ante]
+$nomention
+$httpGet[http://vps-d58308d1.es.cloud.lucnodes.es:4402/API/GetBirthdays?bot_id=$botID&guild_id=$guildID]
+
+$title[Lista de cumpleaños de $serverName[$guildID]]
+$description[> **Cantidad de usuarios:** $httpResult[count]
+* <@$httpResult[users;0;id]> | $httpResult[users;0;fecha]
+$if[$httpResult[users;1;id]==]$else* <@$httpResult[users;1;id]> | $httpResult[users;1;fecha]$endif
+$if[$httpResult[users;2;id]==]$else* <@$httpResult[users;2;id]> | $httpResult[users;2;fecha]$endif
+$if[$httpResult[users;3;id]==]$else* <@$httpResult[users;3;id]> | $httpResult[users;3;fecha]$endif
+$if[$httpResult[users;4;id]==]$else* <@$httpResult[users;4;id]> | $httpResult[users;4;fecha]$endif
+$if[$httpResult[users;5;id]==]$else* <@$httpResult[users;5;id]> | $httpResult[users;5;fecha]$endif
+$if[$httpResult[users;6;id]==]$else* <@$httpResult[users;6;id]> | $httpResult[users;6;fecha]$endif
+$if[$httpResult[users;7;id]==]$else* <@$httpResult[users;7;id]> | $httpResult[users;7;fecha]$endif
+$if[$httpResult[users;8;id]==]$else* <@$httpResult[users;8;id]> | $httpResult[users;8;fecha]$endif
+$if[$httpResult[users;9;id]==]$else* <@$httpResult[users;9;id]> | $httpResult[users;9;fecha]$endif
+$if[$httpResult[users;10;id]==]$else* <@$httpResult[users;10;id]> | $httpResult[users;10;fecha]$endif]
+$footer[Akiomae APIS]
+$addTimestamp
+$addButton[no;Birthday-ante;;primary;yes;◀️]
+$addButton[no;Birthday-sig;;primary;no;▶️]
+$endif
+
+$endif
