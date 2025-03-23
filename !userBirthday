@@ -1,0 +1,27 @@
+$nomention
+$var[ID;$findUser[$message]]
+
+$var[A;$sendMessage[Buscando cumpleaños de $nickname[$var[ID]];yes]]
+$httpGet[http://vps-d58308d1.es.cloud.lucnodes.es:4402/API/UserBirthday?bot_id=$botID&guild_id=$guildID&userID=$var[ID]]
+
+$if[$httpResult[success]==true]
+$title[🎂 Cumpleaños de $nickname[$var[ID]]]
+$description[**Usuario:** $nickname[$var[ID]]
+**Próximo cumpleaños:** $httpResult[data;birthday_details;proximo_cumple_discord]
+**Edad estimada:** `$httpResult[data;birthday_details;edad] $if[$httpResult[data;birthday_details;edad]==1]año$elseaños$endif`
+**Días de vida:** `$httpResult[data;birthday_details;dias_de_vida]`
+**Días para cumpleaños:** `$httpResult[data;birthday_details;dias_para_cumpleaños] $if[$httpResult[data;birthday_details;dias_para_cumpleaños]==1]día$elsedías$endif`
+**Día de la semana:** $httpResult[data;birthday_details;dia_de_la_semana]
+**Estación del año:** $httpResult[data;birthday_details;estacion]
+**Signo zodiacal:** $httpResult[data;birthday_details;signo_zodiacal]]
+$thumbnail[$userAvatar[$var[ID]]]
+$color[#ff9af9]
+$footer[En $httpResult[data;birthday_details;dias_para_cumpleaños] $if[$httpResult[data;birthday_details;dias_para_cumpleaños]==1]día$elsedías$endif avisaremos al servidor sobre tu cumpleaños 🎉]
+$else
+$description[❌ Ocurrió un error.
+> El usuario $nickname[$var[ID]], no tiene registrado su fecha de cumpleaños aun.
+-# Usar **!addBirthday** `día/mes/año`]
+$endif
+
+$reply
+$deleteMessage[$channelID;$var[A]]
