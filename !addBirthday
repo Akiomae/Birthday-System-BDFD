@@ -1,0 +1,44 @@
+$nomention
+$argsCheck[>1;Porfavor escribe tu fecha con el formato **DÍA/MES/AÑO**
+> Ejemplo: `28/12/2000`]
+
+$textSplit[$message;/]
+$if[$isNumber[$splitText[1]]==true]
+$if[$isNumber[$splitText[2]]==true]
+$if[$isNumber[$splitText[3]]==true]
+
+$nomention
+$var[ID;$sendMessage[Estableciendo cumpleaños de $nickname[$authorID];yes]]
+$httpPost[http://vps-d58308d1.es.cloud.lucnodes.es:4402/API/AddBirthday;{
+  "bot_id": "$botID",
+  "guild_id": "$guildID",
+  "userID": "$authorID",
+  "username": "$username[$authorID]",
+  "date": "$splitText[1]/$splitText[2]/$splitText[3]"
+}]
+
+$if[$httpResult[success]==true]
+$httpGet[https://edgabot.lucnodes.es/api/others/birthday.php?input=$splitText[3]-$splitText[2]-$splitText[1]]
+$title[🎂 Cumpleaños añadido]
+$thumbnail[$userAvatar[$authorID]]
+$description[**Usuario:** $nickname[$authorID]
+**Cumpleaños:** `$splitText[1]/$splitText[2]/$splitText[3]`
+**Edad estimada:** `$httpResult[edad] $if[$httpResult[edad]==1]año$elseaños$endif`
+**Días para cumpleaños:** `$httpResult[dias_para_cumpleaños] días`]
+$color[#ff9af9]
+$else
+$var[ID;$sendMessage[Estableciendo cumpleaños de $nickname[$authorID];yes]]
+$description[❌ Ocurrió un error.
+> El servidor aun no tiene un canal de cumpleaños establecido
+-# Usa **!setBirthday** `#CANAL`]
+$endif
+$else
+$var[ID;$sendMessage[Estableciendo cumpleaños de $nickname[$authorID];yes]]
+$description[Metodo incorrecto.
+> Use el formato **DÍA/MES/AÑO**
+> Ejemplo: `28/12/2000`]
+$endif
+$endif
+$endif
+$reply
+$deleteMessage[$channelID;$var[ID]]
