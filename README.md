@@ -1,6 +1,12 @@
 # Birthday-System-in-BDFD
 Sistema de Cumpleaños para BDFD (Bot Desinger For Discord)
 
+#### Solo necesitas crear 1 variable
+
+| name | value     |
+| :-------- | :------- |
+| `TOKEN` | `El token de su bot de discord` | 
+
 ## Comandos
 - !setBirthday (Establecer el canal de cumpleaños)
 - !addBirthday (Para que un usuario añada su fecha de cumpleaños)
