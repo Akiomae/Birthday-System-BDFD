@@ -1,0 +1,32 @@
+$nomention
+$var[ID;$sendMessage[Buscando la lista de cumpleaños del servidor...;yes]]
+$httpGet[http://vps-d58308d1.es.cloud.lucnodes.es:4402/API/GetBirthdays?bot_id=$botID&guild_id=$guildID]
+
+$if[$httpResult[users;0;id]==]
+$description[El servidor **$serverName[$guildID]** aun no tiene usuarios registrados en la lista de cumpleaños]
+$else
+$title[Lista de cumpleaños de $serverName[$guildID]]
+$description[> **Cantidad de usuarios:** $httpResult[count]
+* <@$httpResult[users;0;id]> | $httpResult[users;0;fecha]
+$if[$httpResult[users;1;id]==]$else* <@$httpResult[users;1;id]> | $httpResult[users;1;fecha]$endif
+$if[$httpResult[users;2;id]==]$else* <@$httpResult[users;2;id]> | $httpResult[users;2;fecha]$endif
+$if[$httpResult[users;3;id]==]$else* <@$httpResult[users;3;id]> | $httpResult[users;3;fecha]$endif
+$if[$httpResult[users;4;id]==]$else* <@$httpResult[users;4;id]> | $httpResult[users;4;fecha]$endif
+$if[$httpResult[users;5;id]==]$else* <@$httpResult[users;5;id]> | $httpResult[users;5;fecha]$endif
+$if[$httpResult[users;6;id]==]$else* <@$httpResult[users;6;id]> | $httpResult[users;6;fecha]$endif
+$if[$httpResult[users;7;id]==]$else* <@$httpResult[users;7;id]> | $httpResult[users;7;fecha]$endif
+$if[$httpResult[users;8;id]==]$else* <@$httpResult[users;8;id]> | $httpResult[users;8;fecha]$endif
+$if[$httpResult[users;9;id]==]$else* <@$httpResult[users;9;id]> | $httpResult[users;9;fecha]$endif
+$if[$httpResult[users;10;id]==]$else* <@$httpResult[users;10;id]> | $httpResult[users;10;fecha]$endif]
+$footer[Akiomae APIS]
+$addTimestamp
+$if[$httpResult[count]>=11]
+$addButton[no;Birthday-ante;;primary;yes;◀️]
+$addButton[no;Birthday-sig;;primary;no;▶️]
+$elseif[$httpResult[count]<=11]]
+$addButton[no;Birthday-ante;;primary;yes;◀️]
+$addButton[no;Birthday-sig;;primary;yes;▶️]
+$endif
+$endif
+$deleteMessage[$channelID;$var[ID]]
+$reply
