@@ -8,6 +8,9 @@ $if[$isNumber[$splitText[2]]==true]
 $if[$isNumber[$splitText[3]]==true]
 
 $nomention
+$suppressErrors[Ocurrio un error.
+> Use el formato **DÍA/MES/AÑO**
+> Ejemplo: `28/12/2000`]
 $var[ID;$sendMessage[Estableciendo cumpleaños de $nickname[$authorID];yes]]
 $httpPost[http://vps-d58308d1.es.cloud.lucnodes.es:4402/API/AddBirthday;{
   "bot_id": "$botID",
@@ -16,9 +19,11 @@ $httpPost[http://vps-d58308d1.es.cloud.lucnodes.es:4402/API/AddBirthday;{
   "username": "$username[$authorID]",
   "date": "$splitText[1]/$splitText[2]/$splitText[3]"
 }]
-
 $if[$httpResult[success]==true]
 $httpGet[https://edgabot.lucnodes.es/api/others/birthday.php?input=$splitText[3]-$splitText[2]-$splitText[1]]
+$suppressErrors[Ocurrio un error.
+> Use el formato **DÍA/MES/AÑO**
+> Ejemplo: `28/12/2000`]
 $title[🎂 Cumpleaños añadido]
 $thumbnail[$userAvatar[$authorID]]
 $description[**Usuario:** $nickname[$authorID]
@@ -27,18 +32,34 @@ $description[**Usuario:** $nickname[$authorID]
 **Días para cumpleaños:** `$httpResult[dias_para_cumpleaños] días`]
 $color[#ff9af9]
 $else
-$var[ID;$sendMessage[Estableciendo cumpleaños de $nickname[$authorID];yes]]
+
+$if[$httpResult[details]==La edad mínima permitida es de 5 años]
 $description[❌ Ocurrió un error.
-> El servidor aun no tiene un canal de cumpleaños establecido
--# Usa **!setBirthday** `#CANAL`]
+> La edad minima es de 5 años
+-# No puedes estar en discord con menos de 5 años de edad]
 $endif
-$else
-$var[ID;$sendMessage[Estableciendo cumpleaños de $nickname[$authorID];yes]]
+$if[$httpResult[details]==La edad máxima permitida es de 100 años]
+$description[❌ Ocurrió un error.
+> La edad maxima es de 100 años
+-# Hermano ya debes estar bajo tierra 🪦]
+$endif
+$if[$httpResult[details]==La fecha ingresada no es válida]
 $description[Metodo incorrecto.
 > Use el formato **DÍA/MES/AÑO**
 > Ejemplo: `28/12/2000`]
 $endif
+$if[$httpResult[error]==Bot o servidor no configurado]
+$description[❌ Ocurrió un error.
+> El servidor aun no tiene un canal de cumpleaños establecido
+-# Usa **!setBirthday** `#CANAL`]
+$endif
+
+$endif
+$endif
 $endif
 $endif
 $reply
+$suppressErrors[Ocurrio un error.
+> Use el formato **DÍA/MES/AÑO**
+> Ejemplo: `28/12/2000`]
 $deleteMessage[$channelID;$var[ID]]
