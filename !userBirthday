@@ -16,7 +16,7 @@ $description[**Usuario:** $nickname[$var[ID]]
 **Signo zodiacal:** $httpResult[data;birthday_details;signo_zodiacal]]
 $thumbnail[$userAvatar[$var[ID]]]
 $color[#ff9af9]
-$footer[En $httpResult[data;birthday_details;dias_para_cumpleaños] $if[$httpResult[data;birthday_details;dias_para_cumpleaños]==1]día$elsedías$endif avisaremos al servidor sobre tu cumpleaños 🎉]
+$footer[En $httpResult[data;birthday_details;dias_para_cumpleaños] $if[$httpResult[data;birthday_details;dias_para_cumpleaños]==1]día$elsedías$endif avisaremos al servidor sobre $if[$var[ID]==$authorID]tu cumpleaños$elseeel cumpleaños de $username[$var[ID]]$endif 🎉]
 $else
 $description[❌ Ocurrió un error.
 > El usuario $nickname[$var[ID]], no tiene registrado su fecha de cumpleaños aun.
